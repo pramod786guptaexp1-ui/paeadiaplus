@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "paeadiaplus-app",
+  "private_key_id": "bd01480d3a713e85bbbff278b7b651bb8557b54d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCeGcGyJxUN2/D2\nAkvxxO0cjeqJQEM77FL9eeTsb0JZU7DV9xfjuKen6ab8JxVJ/k10FDWtxjwdJjHH\nB53PUINxjgMZb5m0BnQZTNQukdcqzrWqRS/huDfjUW9Og1bkhfzzYdXPqhfre2Gc\nR4r/aK4b+g7Kg8+qsWPvisxdBanyE4azEg/TNEQe8YXPdv9fxZXSGmeGP5wCLdut\n8CcS1z2vc36WizayG1ANLntJFLxY4DCJ+4G22UUIBY3SrMN8j58esnaODJaAunvT\nK3qAo3e7WpXgQMVD+PNXSL9OYMXnvgIWFD75gtXJQ0p/sL2Wf/tjKjdw23ahNsTf\n2BTzcVjHAgMBAAECggEAEsy7RKTzEvfRWl+BillBXMDfX7y9gfWjFLMW7qp4OEkE\nYR0FwTVm8keNbLR1Cpxrt17j1ysYYNr21lTohgtr5efeJHspysdtrMh+/p6m+Fcm\nMP4TKIMQWj6Hvs1NWtU38/TxSMVQHNdKDxxOwfo/oeIFOj2cRw7a9FQL4w/WWouZ\nyRyLVeJYLUV9rVkSbBMsct97TIvAzfF7jeVY4K7DxLo2VCHuEHXp2q0Q4SJcQEUX\nnTFo1NwsfIvDT2kmbJaLR1A2ecwQP9Lmo6XOtydYXp067lzpK5IiiId+aO0vKZJz\nLCoD89Wj7XNVQNCu8Bkvh4Qel3pra4+EDsRjr4/oqQKBgQDdyQRMvcQbJ85xXp7/\nn+DuzrsmJGwhCivVs6IViQJldiPBWnlIuBMDwKyryCXyqyjeqFvVznkDzbYQd2+d\n20V46ZYUAATa9X3Y/naAcDRnXWKaXg8sqS4eh/n80bpsG+jpMjV7XBCaK/tIGpwc\n7fOpjnmNckKDk1CXcPu/PgFuewKBgQC2faNQOeEYpsv/ByQFflZ+RxQF9KGJbsi3\ndC6B0ZZqMW2ZFpzQGmxZScATbkyHbqpp4qQr0RXOKdgu56hPINB6LT5b2mODkjqd\n83kDflCpFoh4vwEXjdbiQahX+TKNNuc9Iucz5rcPuUs0nhw5WjJjeycNR8lweel5\nmlbiHHfTJQKBgGeIqYsxo1SR9puR8mOevSB+PXuG0TtzRhdS7j1jYkz/I53loGzE\nEYxU68adfqmUIVYf/g8HfhK6e12gg+iLLhlN4hOgFqQoqgEceTFoL+5498jcU/Uj\nXTY/gAH33jENrmL+X10hE1cFZR653Vrb8j2bFz9isY4+vQaVZdBXH8/1AoGABk3g\nzmyxcgCRG4ZLoET1B/e8oVgKHI1PMcc5tBJhd9mtR5SYZjgDdjIuCH3O9v7DtFS4\nByt57V1UsooeLl2b1hyqAtJQjcMHc11t2MkMUEsO+9zdVMr5mWdbQW7CaE51Po9u\nHUTjHg/woSi1IOYUx4sBllvcgZ40ipbiWX1SRmECgYBh0TwROF77Z1wTaYLY/WQb\nGxMtDiLQrBPgmPaHF80zun4MsZaHjwcWFLd56mwrt5HKy8xocj58stN11OCJfulD\nUq7Ul4fmshSAbN3c7Z/+J96HQF6U6MNunZkgG942z1/E0QNb+RsmfiLE6vSvf9Wv\nxaFdbGz8VfGjkRoFop6FPA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "paeadiaplus-service-account@paeadiaplus-app.iam.gserviceaccount.com",
+  "client_id": "111127666021194525309",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/paeadiaplus-service-account%40paeadiaplus-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
