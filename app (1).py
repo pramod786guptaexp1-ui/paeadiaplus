@@ -34,7 +34,7 @@ def save_to_google_sheet(sheet_name, data):
     except Exception as e:
         st.error(f"Failed to save data to Google Sheets: {e}")
         return False
-    ------------------------------------------------------------------------
+ #   ------------------------------------------------------------------------
     
     # Placeholder success message for demonstration
     time.sleep(1)
