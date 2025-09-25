@@ -101,7 +101,7 @@ def generate_pdf_fpdf(llm_summary, data):
     pdf.chapter_body(f"Remarks: {data['Remarks']}")
 
     # LLM Summary
-    pdf.chapter_title("LLM Report Summary")
+    pdf.chapter_title("Report Summary")
     pdf.set_font('Arial', '', 10)
     pdf.chapter_body(llm_summary)
     
