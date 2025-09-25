@@ -1,7 +1,106 @@
 import streamlit as st
 import pandas as pd
 import time
+import textwrap
+import pdfkit
 
+def generate_llm_summary(data):
+    """
+    Simulates an API call to an open-source LLM to generate a summary.
+    Replace this with your actual LLM integration code.
+    """
+    prompt = f"""
+    Based on the following student's eye test data, generate a concise and clear medical summary in a professional tone. 
+    Highlight any potential issues or recommendations.
+    
+    Data:
+    Student Name: {data['Student Name']}
+    Date of Birth: {data['Date of Birth']}
+    School Name: {data['School Name']}
+    Right Eye DVA: {data['Right Eye DVA']}
+    Right Eye Color Vision: {data['Right Eye Color Vision']}
+    Left Eye DVA: {data['Left Eye DVA']}
+    Left Eye Color Vision: {data['Left Eye Color Vision']}
+    Remarks: {data['Remarks']}
+    """
+    
+    # --- This part is a placeholder ---
+    # In a real app, you would send 'prompt' to your LLM API and get a response.
+    # For example, using the Hugging Face API or a local model.
+    # response = llm_api_call(prompt)
+    
+    # Placeholder response for demonstration
+    summary = f"""
+    ### Eye Test Summary for {data['Student Name']}
+    
+    **Patient Information:**
+    - **Name:** {data['Student Name']}
+    - **Date of Birth:** {data['Date of Birth']}
+    - **School:** {data['School Name']}
+    
+    **Vision Acuity:**
+    - **Right Eye:** The patient's distance vision acuity (DVA) for the right eye is {data['Right Eye DVA']}.
+    - **Left Eye:** The patient's distance vision acuity (DVA) for the left eye is {data['Left Eye DVA']}.
+    
+    **Color Vision:**
+    - **Right Eye:** Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
+    - **Left Eye:** Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
+    
+    **Findings & Recommendations:**
+    {data['Remarks'] if data['Remarks'] else 'No specific remarks were noted during the examination.'}
+    """
+    return textwrap.dedent(summary)
+
+def generate_pdf_report(llm_summary, data):
+    """
+    Generates a PDF report from the LLM summary and raw data.
+    """
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Eye Report for {data['Student Name']}</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; margin: 40px; }}
+            h1, h2 {{ color: #004d40; }}
+            .data-section {{ margin-bottom: 20px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px; }}
+            .llm-summary {{ background-color: #f1f8e9; padding: 15px; border-radius: 5px; }}
+            .field-label {{ font-weight: bold; }}
+        </style>
+    </head>
+    <body>
+        <h1>Paeadiaplus ChildCare - Eye Report</h1>
+        <h2>Student Information</h2>
+        <div class="data-section">
+            <p><span class="field-label">Student Name:</span> {data['Student Name']}</p>
+            <p><span class="field-label">Date of Birth:</span> {data['Date of Birth']}</p>
+            <p><span class="field-label">School Name:</span> {data['School Name']}</p>
+        </div>
+        <h2>Eye Test Results</h2>
+        <div class="data-section">
+            <p><span class="field-label">Right Eye DVA:</span> {data['Right Eye DVA']}</p>
+            <p><span class="field-label">Right Eye Color Vision:</span> {data['Right Eye Color Vision']}</p>
+            <p><span class="field-label">Left Eye DVA:</span> {data['Left Eye DVA']}</p>
+            <p><span class="field-label">Left Eye Color Vision:</span> {data['Left Eye Color Vision']}</p>
+            <p><span class="field-label">Remarks:</span> {data['Remarks']}</p>
+        </div>
+        <h2>LLM Report Summary</h2>
+        <div class="llm-summary">
+            {llm_summary.replace('\n', '<br>')}
+        </div>
+    </body>
+    </html>
+    """
+    
+    # You may need to specify the path to wkhtmltopdf if it's not in your system's PATH
+    # config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+    # pdf = pdfkit.from_string(html_content, False, configuration=config)
+    
+    # For a typical setup, this will work
+    pdf = pdfkit.from_string(html_content, False)
+    
+    return pdf
+    
 # --- Google Sheets API Placeholder Function ---
 def save_to_google_sheet(sheet_name, data):
     """
@@ -114,6 +213,7 @@ elif page == "Doctors":
     st.header("Student Eye Test Data Collection")
     st.write("Enter the student's eye test details here.")
     st.image("https://images.pexels.com/photos/3771120/pexels-photo-3771120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Eye examinations are quick and easy", use_container_width=True)
+    
     with st.form("eye_test_form"):
         st.write("Student Details")
         student_name = st.text_input("Student Name")
@@ -135,12 +235,40 @@ elif page == "Doctors":
         remarks = st.text_area("Remarks / Prescription (if any)")
         
         submitted = st.form_submit_button("Submit Data")
+
         if submitted:
             if student_name and dob and school_name:
-                eye_data = [student_name, dob, school_name, od_dist_va, od_color_vision, os_dist_va, os_color_vision, remarks, pd.Timestamp.now()]
-                print(eye_data)
-                st.subheader("Submitted Data")
-                st.write(eye_data)
+                eye_data = {
+                    "Student Name": student_name,
+                    "Date of Birth": dob.strftime("%Y-%m-%d"),
+                    "School Name": school_name,
+                    "Right Eye DVA": od_dist_va,
+                    "Right Eye Color Vision": od_color_vision,
+                    "Left Eye DVA": os_dist_va,
+                    "Left Eye Color Vision": os_color_vision,
+                    "Remarks": remarks
+                }
+                
+                # --- LLM API Call and Summary Generation ---
+                st.subheader("Report Summary")
+                st.info("Generating summary using Open Source LLM...")
+                
+                # Placeholder for LLM API call
+                llm_response = generate_llm_summary(eye_data)
+                
+                st.markdown(llm_response)
+                
+                # --- PDF Generation and Download ---
+                st.subheader("Download Report")
+                pdf_file = generate_pdf_report(llm_response, eye_data)
+                
+                st.download_button(
+                    label="Download Report as PDF",
+                    data=pdf_file,
+                    file_name=f"{student_name}_Eye_Report.pdf",
+                    mime="application/pdf"
+                )
+                
             else:
                 st.warning("Please fill out all student details.")
 
