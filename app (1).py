@@ -3,11 +3,6 @@ import pandas as pd
 import time
 
 # --- Google Sheets API Placeholder Function ---
-# IMPORTANT: This function is a placeholder and requires you to set up the Google Sheets API.
-# You will need to install the gspread and google-auth libraries and
-# enable the Google Sheets API in the Google Cloud Console.
-# You also need to create a service account and download its credentials.
-# The `creds.json` file should be placed in your project directory.
 def save_to_google_sheet(sheet_name, data):
     """
     Saves form data to a Google Sheet. This is a placeholder function.
@@ -34,7 +29,6 @@ def save_to_google_sheet(sheet_name, data):
     except Exception as e:
         st.error(f"Failed to save data to Google Sheets: {e}")
         return False
- #   ------------------------------------------------------------------------
     
     # Placeholder success message for demonstration
     time.sleep(1)
@@ -58,24 +52,29 @@ page = st.sidebar.radio("Navigate", ["Home", "About Us", "Our Services", "School
 if page == "Home":
     st.header("Welcome to Paeadiaplus ChildCare")
     st.write("Your partner in nurturing a healthier, happier future for children.")
-    st.image("https://placehold.co/800x400/87CEEB/ffffff?text=Caring+for+Your+Child's+Future")
+    # Use a local image or a URL for a placeholder
+    st.image("https://images.pexels.com/photos/4033148/pexels-photo-4033148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Caring for Your Child's Future", use_column_width=True)
     st.markdown("""
         Paeadiaplus ChildCare is dedicated to providing comprehensive healthcare solutions for schools. 
         We believe that a healthy mind and body are the foundations of a successful education.
         Explore our services to see how we can help your school community.
     """)
+    st.image("https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="A warm and friendly environment", use_column_width=True)
 
 elif page == "About Us":
     st.header("About Us")
+    st.image("https://images.pexels.com/photos/5407008/pexels-photo-5407008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Our team is dedicated to your child's well-being", use_column_width=True)
     st.markdown("""
         At Paeadiaplus, we are on a mission to revolutionize school healthcare by placing a strong emphasis on mental well-being alongside physical health. 
         We believe that by integrating mental health support into the school system, we can create a nurturing environment where every child can thrive academically, emotionally, and socially. 
         
         Our team of dedicated professionals is committed to providing schools with the resources and expertise needed to address the holistic needs of their students. We partner with educational institutions to build a future where every child has the support they need to succeed.
     """)
+    st.image("https://images.pexels.com/photos/4167542/pexels-photo-4167542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Child-friendly health check-ups", use_column_width=True)
 
 elif page == "Our Services":
     st.header("Our Services")
+    st.image("https://images.pexels.com/photos/4167540/pexels-photo-4167540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Comprehensive health services for schools", use_column_width=True)
     st.markdown("""
         We offer a range of specialized services designed to promote the health and well-being of the school community.
         
@@ -83,10 +82,12 @@ elif page == "Our Services":
         * **Sex Education:** Age-appropriate and comprehensive sessions to empower students with knowledge about their bodies, relationships, and health.
         * **Seminars on Mental and Physical Health:** Engaging and informative sessions for students, teachers, and parents on topics like stress management, nutrition, and hygiene.
     """)
+    st.image("https://images.pexels.com/photos/3845946/pexels-photo-3845946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Learning and growing together", use_column_width=True)
 
 elif page == "Schools":
     st.header("School Registration")
     st.write("Register your school to access our specialized healthcare services.")
+    st.image("https://images.pexels.com/photos/4167543/pexels-photo-4167543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Partner with us to create a healthier school environment", use_column_width=True)
     with st.form("school_registration_form"):
         st.write("School Information")
         school_name = st.text_input("School Name")
@@ -99,21 +100,18 @@ elif page == "Schools":
         if submitted:
             if school_name and contact_person and email and phone:
                 school_data = [school_name, contact_person, email, phone, message, pd.Timestamp.now()]
-                #save_to_google_sheet("School Registrations", school_data)
-                # Print the data to the console
                 print(school_data)
-                
-                # Display the data in the Streamlit app
                 st.subheader("Submitted School Data")
                 st.write(school_data)
             else:
                 st.warning("Please fill out all required fields.")
     st.write("---")
     st.write("We will contact you shortly after receiving your registration.")
-
+    
 elif page == "Doctors":
     st.header("Student Eye Test Data Collection")
     st.write("Enter the student's eye test details here.")
+    st.image("https://images.pexels.com/photos/3771120/pexels-photo-3771120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Eye examinations are quick and easy", use_column_width=True)
     with st.form("eye_test_form"):
         st.write("Student Details")
         student_name = st.text_input("Student Name")
@@ -124,13 +122,11 @@ elif page == "Doctors":
         col1, col2 = st.columns(2)
         with col1:
             st.write("Right Eye (OD)")
-            # Changed the label to be unique for the right eye
             od_dist_va = st.selectbox("Right Eye DVA", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
             od_color_vision = st.selectbox("Right Eye Color Vision", options=["Normal", "Deficient"])
             
         with col2:
             st.write("Left Eye (OS)")
-            # Changed the label to be unique for the left eye
             os_dist_va = st.selectbox("Left Eye DVA", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
             os_color_vision = st.selectbox("Left Eye Color Vision", options=["Normal", "Deficient"])
 
@@ -140,25 +136,22 @@ elif page == "Doctors":
         if submitted:
             if student_name and dob and school_name:
                 eye_data = [student_name, dob, school_name, od_dist_va, od_color_vision, os_dist_va, os_color_vision, remarks, pd.Timestamp.now()]
-                #save_to_google_sheet("Eye Test Data", eye_data)
-                # Print the data to the console
                 print(eye_data)
-                
-                # Display the data in the Streamlit app
                 st.subheader("Submitted Data")
                 st.write(eye_data)
-            
             else:
                 st.warning("Please fill out all student details.")
 
 elif page == "News/Media":
     st.header("News & Media")
+    st.image("https://images.pexels.com/photos/4033146/pexels-photo-4033146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="In the news and media", use_column_width=True)
     st.write("Stay up-to-date with our latest news and media releases.")
     st.write("Content coming soon...")
 
 elif page == "Contact Us":
     st.header("Contact Us")
     st.write("We would love to hear from you! Please fill out the form below.")
+    st.image("https://images.pexels.com/photos/4033150/pexels-photo-4033150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Get in touch with us", use_column_width=True)
     with st.form("contact_form"):
         name = st.text_input("Your Name")
         email = st.text_input("Your Email")
