@@ -3,6 +3,7 @@ import pandas as pd
 import time
 from fpdf import FPDF
 import textwrap
+from streamlit_option_menu import option_menu
 
 # --- Google Sheets API Placeholder Function ---
 def save_to_google_sheet(sheet_name, data):
@@ -44,7 +45,7 @@ def generate_llm_summary(data):
     Simulates an API call to an open-source LLM to generate a summary.
     """
     summary = f"""
-    ### Eye Test Summary for {data['Student Name']}
+    Eye Test Summary for {data['Student Name']}
     
     Patient Information:
     - Name: {data['Student Name']}
@@ -59,7 +60,7 @@ def generate_llm_summary(data):
     - Right Eye: Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
     - Left Eye: Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
     
-    Findings & Recommendations:
+    **Findings & Recommendations:**
     {data['Remarks'] if data['Remarks'] else 'No specific remarks were noted during the examination.'}
     """
     return textwrap.dedent(summary)
@@ -68,7 +69,7 @@ def generate_llm_summary(data):
 class PDF(FPDF):
     def header(self):
         self.set_font('Arial', 'B', 15)
-        self.cell(0, 10, 'Paediaplus ChildCare - Eye Report', 0, 1, 'C')
+        self.cell(0, 10, 'Paeadiaplus ChildCare - Eye Report', 0, 1, 'C')
         self.ln(10)
 
     def chapter_title(self, title):
@@ -101,7 +102,7 @@ def generate_pdf_fpdf(llm_summary, data):
     pdf.chapter_body(f"Remarks: {data['Remarks']}")
 
     # LLM Summary
-    pdf.chapter_title("Report Summary")
+    pdf.chapter_title("LLM Report Summary")
     pdf.set_font('Arial', '', 10)
     pdf.chapter_body(llm_summary)
     
@@ -115,7 +116,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Sidebar Navigation ---
 # --- Sidebar Navigation ---
 with st.sidebar:
     st.title("Paediaplus ChildCare")
