@@ -92,12 +92,12 @@ def generate_pdf_report(llm_summary, data):
     </html>
     """
     
-    # You may need to specify the path to wkhtmltopdf if it's not in your system's PATH
-    # config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
-    # pdf = pdfkit.from_string(html_content, False, configuration=config)
+    # Configure pdfkit to point to the wkhtmltopdf executable
+    path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'  # This is the common path on Linux systems
+    config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
     
-    # For a typical setup, this will work
-    pdf = pdfkit.from_string(html_content, False)
+    # Pass the configuration to the from_string method
+    pdf = pdfkit.from_string(html_content, False, configuration=config)
     
     return pdf
     
