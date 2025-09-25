@@ -53,17 +53,17 @@ if page == "Home":
     st.header("Welcome to Paediaplus ChildCare")
     st.write("Your partner in nurturing a healthier, happier future for children.")
     # Image with specified width
-    st.image("https://images.pexels.com/photos/4033148/pexels-photo-4033148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Caring for Your Child's Future", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4033148/pexels-photo-4033148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Caring for Your Child's Future", width=600)
     st.markdown("""
         Paediaplus ChildCare is dedicated to providing comprehensive healthcare solutions for schools. 
         We believe that a healthy mind and body are the foundations of a successful education.
         Explore our services to see how we can help your school community.
     """)
-    st.image("https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="A warm and friendly environment", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="A warm and friendly environment", width=600)
 
 elif page == "About Us":
     st.header("About Us")
-    st.image("https://images.pexels.com/photos/5407008/pexels-photo-5407008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Our team is dedicated to your child's well-being", width=600, height=300)
+    st.image("https://images.pexels.com/photos/5407008/pexels-photo-5407008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Our team is dedicated to your child's well-being", width=600)
     st.markdown("""
         At Paediaplus, we are on a mission to revolutionize school healthcare by placing a strong emphasis on mental well-being alongside physical health. 
         We believe that by integrating mental health support into the school system, we can create a nurturing environment where every child can thrive academically, emotionally, and socially. 
@@ -74,7 +74,7 @@ elif page == "About Us":
 
 elif page == "Our Services":
     st.header("Our Services")
-    st.image("https://images.pexels.com/photos/4167540/pexels-photo-4167540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Comprehensive health services for schools", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4167540/pexels-photo-4167540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Comprehensive health services for schools", width=600)
     st.markdown("""
         We offer a range of specialized services designed to promote the health and well-being of the school community.
         
@@ -82,12 +82,12 @@ elif page == "Our Services":
         * **Sex Education:** Age-appropriate and comprehensive sessions to empower students with knowledge about their bodies, relationships, and health.
         * **Seminars on Mental and Physical Health:** Engaging and informative sessions for students, teachers, and parents on topics like stress management, nutrition, and hygiene.
     """)
-    st.image("https://images.pexels.com/photos/3845946/pexels-photo-3845946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Learning and growing together", width=600, height=300)
+    st.image("https://images.pexels.com/photos/3845946/pexels-photo-3845946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Learning and growing together", width=600)
 
 elif page == "Schools":
     st.header("School Registration")
     st.write("Register your school to access our specialized healthcare services.")
-    st.image("https://images.pexels.com/photos/4167543/pexels-photo-4167543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Partner with us to create a healthier school environment", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4167543/pexels-photo-4167543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Partner with us to create a healthier school environment", width=600)
     with st.form("school_registration_form"):
         st.write("School Information")
         school_name = st.text_input("School Name")
@@ -111,7 +111,7 @@ elif page == "Schools":
 elif page == "Doctors":
     st.header("Student Eye Test Data Collection")
     st.write("Enter the student's eye test details here.")
-    st.image("https://images.pexels.com/photos/3771120/pexels-photo-3771120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Eye examinations are quick and easy", width=600, height=300)
+    st.image("https://images.pexels.com/photos/3771120/pexels-photo-3771120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Eye examinations are quick and easy", width=600)
     with st.form("eye_test_form"):
         st.write("Student Details")
         student_name = st.text_input("Student Name")
@@ -144,14 +144,14 @@ elif page == "Doctors":
 
 elif page == "News/Media":
     st.header("News & Media")
-    st.image("https://images.pexels.com/photos/4033146/pexels-photo-4033146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="In the news and media", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4033146/pexels-photo-4033146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="In the news and media", width=600)
     st.write("Stay up-to-date with our latest news and media releases.")
     st.write("Content coming soon...")
 
 elif page == "Contact Us":
     st.header("Contact Us")
     st.write("We would love to hear from you! Please fill out the form below.")
-    st.image("https://images.pexels.com/photos/4033150/pexels-photo-4033150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Get in touch with us", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4033150/pexels-photo-4033150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Get in touch with us", width=600)
     with st.form("contact_form"):
         name = st.text_input("Your Name")
         email = st.text_input("Your Email")
