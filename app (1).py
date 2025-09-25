@@ -116,8 +116,17 @@ st.set_page_config(
 )
 
 # --- Sidebar Navigation ---
-st.sidebar.title("Paediaplus ChildCare")
-page = st.sidebar.radio("Navigate", ["Home", "About Us", "Our Services", "Schools", "Doctors", "News/Media", "Contact Us"])
+# --- Sidebar Navigation ---
+with st.sidebar:
+    st.title("Paediaplus ChildCare")
+    page = option_menu(
+        menu_title=None, # required
+        options=["Home", "About Us", "Our Services", "Schools", "Doctors", "News/Media", "Contact Us"], # required
+        icons=['house', 'info-circle', 'briefcase', 'building', 'heart', 'newspaper', 'telephone'],
+        menu_icon="cast", # optional
+        default_index=0, # optional
+        orientation="vertical",
+    )
 
 # --- Main Page Content ---
 if page == "Home":
