@@ -1,107 +1,9 @@
 import streamlit as st
 import pandas as pd
 import time
+from fpdf import FPDF
 import textwrap
-import pdfkit
-import platform
 
-def generate_llm_summary(data):
-    """
-    Simulates an API call to an open-source LLM to generate a summary.
-    Replace this with your actual LLM integration code.
-    """
-    prompt = f"""
-    Based on the following student's eye test data, generate a concise and clear medical summary in a professional tone. 
-    Highlight any potential issues or recommendations.
-    
-    Data:
-    Student Name: {data['Student Name']}
-    Date of Birth: {data['Date of Birth']}
-    School Name: {data['School Name']}
-    Right Eye DVA: {data['Right Eye DVA']}
-    Right Eye Color Vision: {data['Right Eye Color Vision']}
-    Left Eye DVA: {data['Left Eye DVA']}
-    Left Eye Color Vision: {data['Left Eye Color Vision']}
-    Remarks: {data['Remarks']}
-    """
-    
-    # --- This part is a placeholder ---
-    # In a real app, you would send 'prompt' to your LLM API and get a response.
-    # For example, using the Hugging Face API or a local model.
-    # response = llm_api_call(prompt)
-    
-    # Placeholder response for demonstration
-    summary = f"""
-    ### Eye Test Summary for {data['Student Name']}
-    
-    **Patient Information:**
-    - **Name:** {data['Student Name']}
-    - **Date of Birth:** {data['Date of Birth']}
-    - **School:** {data['School Name']}
-    
-    **Vision Acuity:**
-    - **Right Eye:** The patient's distance vision acuity (DVA) for the right eye is {data['Right Eye DVA']}.
-    - **Left Eye:** The patient's distance vision acuity (DVA) for the left eye is {data['Left Eye DVA']}.
-    
-    **Color Vision:**
-    - **Right Eye:** Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
-    - **Left Eye:** Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
-    
-    **Findings & Recommendations:**
-    {data['Remarks'] if data['Remarks'] else 'No specific remarks were noted during the examination.'}
-    """
-    return textwrap.dedent(summary)
-
-
-def generate_pdf_report(llm_summary, data):
-    """
-    Generates a PDF report from the LLM summary and raw data.
-    """
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Eye Report for {data['Student Name']}</title>
-        <style>
-            body {{ font-family: Arial, sans-serif; margin: 40px; }}
-            h1, h2 {{ color: #004d40; }}
-            .data-section {{ margin-bottom: 20px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px; }}
-            .llm-summary {{ background-color: #f1f8e9; padding: 15px; border-radius: 5px; }}
-            .field-label {{ font-weight: bold; }}
-        </style>
-    </head>
-    <body>
-        <h1>Paediaplus ChildCare - Eye Report</h1>
-        <h2>Student Information</h2>
-        <div class="data-section">
-            <p><span class="field-label">Student Name:</span> {data['Student Name']}</p>
-            <p><span class="field-label">Date of Birth:</span> {data['Date of Birth']}</p>
-            <p><span class="field-label">School Name:</span> {data['School Name']}</p>
-        </div>
-        <h2>Eye Test Results</h2>
-        <div class="data-section">
-            <p><span class="field-label">Right Eye DVA:</span> {data['Right Eye DVA']}</p>
-            <p><span class="field-label">Right Eye Color Vision:</span> {data['Right Eye Color Vision']}</p>
-            <p><span class="field-label">Left Eye DVA:</span> {data['Left Eye DVA']}</p>
-            <p><span class="field-label">Left Eye Color Vision:</span> {data['Left Eye Color Vision']}</p>
-            <p><span class="field-label">Remarks:</span> {data['Remarks']}</p>
-        </div>
-        <h2>LLM Report Summary</h2>
-        <div class="llm-summary">
-            {llm_summary.replace('\n', '<br>')}
-        </div>
-    </body>
-    </html>
-    """
-    
-    # Configure pdfkit with the correct path for Streamlit Cloud
-    path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
-    config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
-    
-    pdf = pdfkit.from_string(html_content, False, configuration=config)
-    
-    return pdf
-    
 # --- Google Sheets API Placeholder Function ---
 def save_to_google_sheet(sheet_name, data):
     """
@@ -135,6 +37,75 @@ def save_to_google_sheet(sheet_name, data):
     st.success("Data has been submitted successfully!")
     print(f"Data to be saved in '{sheet_name}': {data}") # Log data for local verification
     return True
+
+# --- LLM Summary Function ---
+def generate_llm_summary(data):
+    """
+    Simulates an API call to an open-source LLM to generate a summary.
+    """
+    summary = f"""
+    ### Eye Test Summary for {data['Student Name']}
+    
+    **Patient Information:**
+    - **Name:** {data['Student Name']}
+    - **Date of Birth:** {data['Date of Birth']}
+    - **School:** {data['School Name']}
+    
+    **Vision Acuity:**
+    - **Right Eye:** The patient's distance vision acuity (DVA) for the right eye is {data['Right Eye DVA']}.
+    - **Left Eye:** The patient's distance vision acuity (DVA) for the left eye is {data['Left Eye DVA']}.
+    
+    **Color Vision:**
+    - **Right Eye:** Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
+    - **Left Eye:** Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
+    
+    **Findings & Recommendations:**
+    {data['Remarks'] if data['Remarks'] else 'No specific remarks were noted during the examination.'}
+    """
+    return textwrap.dedent(summary)
+
+# --- Fpdf2-based PDF Generation Function ---
+class PDF(FPDF):
+    def header(self):
+        self.set_font('Arial', 'B', 15)
+        self.cell(0, 10, 'Paeadiaplus ChildCare - Eye Report', 0, 1, 'C')
+        self.ln(10)
+
+    def chapter_title(self, title):
+        self.set_font('Arial', 'B', 12)
+        self.set_fill_color(220, 230, 241)
+        self.cell(0, 10, title, 0, 1, 'L', True)
+        self.ln(5)
+
+    def chapter_body(self, body):
+        self.set_font('Arial', '', 10)
+        self.multi_cell(0, 5, body)
+        self.ln(5)
+
+def generate_pdf_fpdf(llm_summary, data):
+    pdf = PDF()
+    pdf.add_page()
+    
+    # Patient Information
+    pdf.chapter_title("Student Information")
+    pdf.chapter_body(f"Student Name: {data['Student Name']}")
+    pdf.chapter_body(f"Date of Birth: {data['Date of Birth']}")
+    pdf.chapter_body(f"School Name: {data['School Name']}")
+    
+    # Eye Test Results
+    pdf.chapter_title("Eye Test Results")
+    pdf.chapter_body(f"Right Eye DVA: {data['Right Eye DVA']}")
+    pdf.chapter_body(f"Right Eye Color Vision: {data['Right Eye Color Vision']}")
+    pdf.chapter_body(f"Left Eye DVA: {data['Left Eye DVA']}")
+    pdf.chapter_body(f"Left Eye Color Vision: {data['Left Eye Color Vision']}")
+    pdf.chapter_body(f"Remarks: {data['Remarks']}")
+
+    # LLM Summary
+    pdf.chapter_title("LLM Report Summary")
+    pdf.set_font('Arial', '', 10)
+    pdf.chapter_body(llm_summary)
+    
+    return pdf.output(dest='S').encode('latin1')
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -254,14 +225,13 @@ elif page == "Doctors":
                 st.subheader("Report Summary")
                 st.info("Generating summary using Open Source LLM...")
                 
-                # Placeholder for LLM API call
                 llm_response = generate_llm_summary(eye_data)
                 
                 st.markdown(llm_response)
                 
-                # --- PDF Generation and Download ---
+                # --- PDF Generation and Download using Fpdf2 ---
                 st.subheader("Download Report")
-                pdf_file = generate_pdf_report(llm_response, eye_data)
+                pdf_file = generate_pdf_fpdf(llm_response, eye_data)
                 
                 st.download_button(
                     label="Download Report as PDF",
