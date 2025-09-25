@@ -208,40 +208,40 @@ elif page == "Doctors":
         
         submitted = st.form_submit_button("Submit Data")
 
-        if submitted:
-            if student_name and dob and school_name:
-                eye_data = {
-                    "Student Name": student_name,
-                    "Date of Birth": dob.strftime("%Y-%m-%d"),
-                    "School Name": school_name,
-                    "Right Eye DVA": od_dist_va,
-                    "Right Eye Color Vision": od_color_vision,
-                    "Left Eye DVA": os_dist_va,
-                    "Left Eye Color Vision": os_color_vision,
-                    "Remarks": remarks
-                }
-                
-                # --- LLM API Call and Summary Generation ---
-                st.subheader("Report Summary")
-                st.info("Generating summary using Open Source LLM...")
-                
-                llm_response = generate_llm_summary(eye_data)
-                
-                st.markdown(llm_response)
-                
-                # --- PDF Generation and Download using Fpdf2 ---
-                st.subheader("Download Report")
-                pdf_file = generate_pdf_fpdf(llm_response, eye_data)
-                
-                st.download_button(
-                    label="Download Report as PDF",
-                    data=pdf_file,
-                    file_name=f"{student_name}_Eye_Report.pdf",
-                    mime="application/pdf"
-                )
-                
-            else:
-                st.warning("Please fill out all student details.")
+    if submitted:
+        if student_name and dob and school_name:
+            eye_data = {
+                "Student Name": student_name,
+                "Date of Birth": dob.strftime("%Y-%m-%d"),
+                "School Name": school_name,
+                "Right Eye DVA": od_dist_va,
+                "Right Eye Color Vision": od_color_vision,
+                "Left Eye DVA": os_dist_va,
+                "Left Eye Color Vision": os_color_vision,
+                "Remarks": remarks
+            }
+            
+            # --- LLM API Call and Summary Generation ---
+            st.subheader("Report Summary")
+            st.info("Generating summary using Open Source LLM...")
+            
+            llm_response = generate_llm_summary(eye_data)
+            
+            st.markdown(llm_response)
+            
+            # --- PDF Generation and Download using Fpdf2 ---
+            st.subheader("Download Report")
+            pdf_file = generate_pdf_fpdf(llm_response, eye_data)
+            
+            st.download_button(
+                label="Download Report as PDF",
+                data=pdf_file,
+                file_name=f"{student_name}_Eye_Report.pdf",
+                mime="application/pdf"
+            )
+            
+        else:
+            st.warning("Please fill out all student details.")
 
 elif page == "News/Media":
     st.header("News & Media")
