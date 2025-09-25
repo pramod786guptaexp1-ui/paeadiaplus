@@ -5,7 +5,6 @@ import textwrap
 import pdfkit
 import platform
 
-
 def generate_llm_summary(data):
     """
     Simulates an API call to an open-source LLM to generate a summary.
@@ -57,7 +56,6 @@ def generate_llm_summary(data):
 def generate_pdf_report(llm_summary, data):
     """
     Generates a PDF report from the LLM summary and raw data.
-    Attempts to find the wkhtmltopdf executable automatically.
     """
     html_content = f"""
     <!DOCTYPE html>
@@ -96,23 +94,12 @@ def generate_pdf_report(llm_summary, data):
     </html>
     """
     
-    # Try different configurations to find the wkhtmltopdf executable
-    try:
-        # Configuration for Streamlit Cloud (most likely path after packages.txt installation)
-        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-        pdf = pdfkit.from_string(html_content, False, configuration=config)
-    except IOError:
-        try:
-            # Fallback for other Linux/UNIX systems
-            config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
-            pdf = pdfkit.from_string(html_content, False, configuration=config)
-        except IOError:
-            # Fallback for other systems (e.g., local development on Windows)
-            # You might need to adjust this path
-            path_wkhtmltopdf = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-            config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-            pdf = pdfkit.from_string(html_content, False, configuration=config)
-            
+    # Configure pdfkit with the correct path for Streamlit Cloud
+    path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+    config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+    
+    pdf = pdfkit.from_string(html_content, False, configuration=config)
+    
     return pdf
     
 # --- Google Sheets API Placeholder Function ---
