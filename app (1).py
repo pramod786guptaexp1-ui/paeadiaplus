@@ -99,7 +99,13 @@ elif page == "Schools":
         if submitted:
             if school_name and contact_person and email and phone:
                 school_data = [school_name, contact_person, email, phone, message, pd.Timestamp.now()]
-                save_to_google_sheet("School Registrations", school_data)
+                #save_to_google_sheet("School Registrations", school_data)
+                # Print the data to the console
+                print(school_data)
+                
+                # Display the data in the Streamlit app
+                st.subheader("Submitted School Data")
+                st.write(school_data)
             else:
                 st.warning("Please fill out all required fields.")
     st.write("---")
