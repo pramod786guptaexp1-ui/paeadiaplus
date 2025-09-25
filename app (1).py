@@ -134,7 +134,14 @@ elif page == "Doctors":
         if submitted:
             if student_name and dob and school_name:
                 eye_data = [student_name, dob, school_name, od_dist_va, od_color_vision, os_dist_va, os_color_vision, remarks, pd.Timestamp.now()]
-                save_to_google_sheet("Eye Test Data", eye_data)
+                #save_to_google_sheet("Eye Test Data", eye_data)
+                # Print the data to the console
+                print(eye_data)
+                
+                # Display the data in the Streamlit app
+                st.subheader("Submitted Data")
+                st.write(eye_data)
+            
             else:
                 st.warning("Please fill out all student details.")
 
