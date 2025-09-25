@@ -46,20 +46,20 @@ def generate_llm_summary(data):
     summary = f"""
     ### Eye Test Summary for {data['Student Name']}
     
-    **Patient Information:**
-    - **Name:** {data['Student Name']}
-    - **Date of Birth:** {data['Date of Birth']}
-    - **School:** {data['School Name']}
+    Patient Information:
+    - Name: {data['Student Name']}
+    - Date of Birth: {data['Date of Birth']}
+    - School: {data['School Name']}
     
-    **Vision Acuity:**
-    - **Right Eye:** The patient's distance vision acuity (DVA) for the right eye is {data['Right Eye DVA']}.
-    - **Left Eye:** The patient's distance vision acuity (DVA) for the left eye is {data['Left Eye DVA']}.
+    Vision Acuity:
+    - Right Eye: The patient's distance vision acuity (DVA) for the right eye is {data['Right Eye DVA']}.
+    - Left Eye: The patient's distance vision acuity (DVA) for the left eye is {data['Left Eye DVA']}.
     
-    **Color Vision:**
-    - **Right Eye:** Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
-    - **Left Eye:** Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
+    Color Vision:
+    - Right Eye: Color vision for the right eye is reported as **{data['Right Eye Color Vision']}**.
+    - Left Eye: Color vision for the left eye is reported as **{data['Left Eye Color Vision']}**.
     
-    **Findings & Recommendations:**
+    Findings & Recommendations:
     {data['Remarks'] if data['Remarks'] else 'No specific remarks were noted during the examination.'}
     """
     return textwrap.dedent(summary)
