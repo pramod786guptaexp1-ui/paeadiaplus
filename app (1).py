@@ -70,7 +70,7 @@ elif page == "About Us":
         
         Our team of dedicated professionals is committed to providing schools with the resources and expertise needed to address the holistic needs of their students. We partner with educational institutions to build a future where every child has the support they need to succeed.
     """)
-    st.image("https://images.pexels.com/photos/4167542/pexels-photo-4167542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Child-friendly health check-ups", width=600, height=300)
+    st.image("https://images.pexels.com/photos/4167542/pexels-photo-4167542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", caption="Child-friendly health check-ups", width=600)
 
 elif page == "Our Services":
     st.header("Our Services")
