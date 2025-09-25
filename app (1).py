@@ -68,7 +68,7 @@ def generate_llm_summary(data):
 class PDF(FPDF):
     def header(self):
         self.set_font('Arial', 'B', 15)
-        self.cell(0, 10, 'Paeadiaplus ChildCare - Eye Report', 0, 1, 'C')
+        self.cell(0, 10, 'Paediaplus ChildCare - Eye Report', 0, 1, 'C')
         self.ln(10)
 
     def chapter_title(self, title):
