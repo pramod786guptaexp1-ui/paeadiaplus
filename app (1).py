@@ -118,13 +118,15 @@ elif page == "Doctors":
         col1, col2 = st.columns(2)
         with col1:
             st.write("Right Eye (OD)")
-            od_dist_va = st.selectbox("Distance Vision Acuity (DVA)", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
-            od_color_vision = st.selectbox("Color Vision", options=["Normal", "Deficient"])
+            # Changed the label to be unique for the right eye
+            od_dist_va = st.selectbox("Right Eye DVA", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
+            od_color_vision = st.selectbox("Right Eye Color Vision", options=["Normal", "Deficient"])
             
         with col2:
             st.write("Left Eye (OS)")
-            os_dist_va = st.selectbox("Distance Vision Acuity (DVA)", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
-            os_color_vision = st.selectbox("Color Vision", options=["Normal", "Deficient"])
+            # Changed the label to be unique for the left eye
+            os_dist_va = st.selectbox("Left Eye DVA", options=["6/6", "6/9", "6/12", "6/18", "6/24", "6/36", "6/60"])
+            os_color_vision = st.selectbox("Left Eye Color Vision", options=["Normal", "Deficient"])
 
         remarks = st.text_area("Remarks / Prescription (if any)")
         
